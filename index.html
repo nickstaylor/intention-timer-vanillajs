@@ -1,12 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <link href="assets.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intention Timer</title>
 </head>
 <body>
-  
+  <header>Intention Timer</header>
+  <main>
+    <div class="form-timer-container">
+      <h2>New Activity</h2>
+      <section class="user-form">
+        <h3>Select a Category:</h3>
+        <div class="top-buttons">
+          <button id="study-btn">
+            <img src="assets/study.svg"/>
+            <span>Study</span>
+          </button>
+          <button id="meditate-btn">
+            <img src="assets/meditate.svg"/>
+            <span>Meditate</span>
+          </button>
+          <button id="exercise-btn">
+            <img src="assets/exercise.svg"/>
+            <span>Exercise</span>
+          </button>
+        </div>
+        <form class="form-inputs">
+          <div class="accomplish">
+            <label for="accomplish">What would you like to accomplish during this time?</label>
+            <input id="accomplish" type="text"/>
+            <div class="error-message hidden">
+              <img src="assets/warning.svg" />
+              <p class="error-active">A description is required</p>
+            </div>
+          </div>
+          <div class="minutes-seconds-inputs">
+            <div class="minutes">
+              <label for="minutes-input">Minutes: </label>
+              <input id="minutes-input" type="text"/>
+              <div class="error-message hidden">
+                <img src="assets/warning.svg" />
+                <p class="error-active">Please enter minutes (0-59)</p>
+              </div>
+            </div>
+            <div class="seconds">
+              <label for="seconds-input">Seconds: </label>
+              <input id="seconds-input" type="text"/>
+              <div class="error-message hidden">
+                <img src="assets/warning.svg" />
+                <p class="error-active">Please enter seconds (0-59)</p>
+              </div>
+            </div>
+          </div>
+          <div class="start-activity-btn">
+          <button id="start-activity">Start Activity</button>
+          </div>
+        </form>
+
+      </section>
+      <section class="timer-section hidden">Timer Section</section>
+    </div>
+    <aside class="activities-container">Saved Activties Container</aside>
+  </main>
+  <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
