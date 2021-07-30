@@ -34,8 +34,8 @@ main {
 .form-timer-container {
   /* grid-area: l; */
   background-color: #2B2733;
-  width: 65%;
-  margin-right: 2%;
+  width: 66%;
+  margin-right: 1%;
 }
 
 .form-timer-container h2 {
@@ -46,6 +46,7 @@ main {
   background: #46424D;  
   margin: 20px;
   height: 85%;
+  padding-top: 2%;
 }
 
 .user-form h3 {
@@ -66,6 +67,7 @@ main {
 .top-buttons span {
   color: #cbc9cf;
   font-size: 1.5em;
+  pointer-events: none;
 }
 
 .top-buttons button {
@@ -83,11 +85,13 @@ main {
 .top-buttons img {
   height: 30px;
   width: 30px;
+  margin-bottom: 0px;
+  pointer-events: none;
 }
 
 .accomplish {
   padding-left: 8%;
-  padding-top: 5%;
+  padding-top: 7%;
   display: flex;
   flex-direction: column;
   width: 82%;
@@ -107,6 +111,11 @@ main {
   display: flex;
   justify-content: flex-start;
   align-items: baseline;
+  margin-bottom: -3%;
+}
+
+.error-category, .error-valid-time {
+  margin-left: 8%;
 }
 
 .error-message img {
@@ -117,6 +126,7 @@ main {
 
 .error-message p {
   font-size: .9em;
+  margin-bottom: 0px;;
 }
 
 .minutes-seconds-inputs {
@@ -125,7 +135,7 @@ main {
   align-items: baseline;
   width: 82%;
   padding-left: 8%;
-  padding-top: 8%;
+  padding-top: 7%;
 }
 
  .minutes, .seconds {
@@ -141,10 +151,6 @@ main {
   padding-top: 10%;
 }
 
-.extra-padding {
-  padding-top: 5%;
-}
-
 .start-activity-btn button {
   width: 25%;
   height: 40px;
@@ -154,36 +160,39 @@ main {
 
 /* colors */ 
 
-.exercise-active {
-  color: #FD8078
+.top-buttons .exercise-active {
+  color: #FD8078;
+  /* border: 1px solid #FD8078; */
 }
 
-.exercise-border {
-  border: 1px solid #FD8078;
+.top-buttons .exercise-border {
+  border: 2px solid #FD8078;
 }
 
-.meditate-active {
-  color: #C278FD
+.top-buttons .meditate-active {
+  color: #C278FD;
+  /* border: 1px solid #C278FD; */
 }
 
-.meditate-border {
-  border: 1px solid #C278FD
+.top-buttons .meditate-border {
+  border: 2px solid #C278FD;
 }
 
-.study-active {
+.top-buttons .study-active {
   color: #B3FD78;
+  /* border: 1px solid #B3FD78; */
 }
 
-.study-border {
-  border: 1px solid #B3FD78
+.top-buttons .study-border {
+  border: 1px solid #B3FD78;
 }
 
 .error-active {
-  color: #EFB7EC
+  color: #EFB7EC;
 }
 
 .error-border {
-  border-bottom: 1px solid #EFB7EC;
+  border-bottom: 2px solid #EFB7EC;
 }
 
 
