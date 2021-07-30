@@ -17,24 +17,28 @@
       <section class="user-form">
         <h3>Select a Category:</h3>
         <div class="top-buttons">
-          <button id="study-btn">
+          <button id="study-btn" class="categories" data-id="study">
             <img src="assets/study.svg"/>
             <span>Study</span>
           </button>
-          <button id="meditate-btn">
+          <button id="meditate-btn" class="categories" data-id="meditate">
             <img src="assets/meditate.svg"/>
             <span>Meditate</span>
           </button>
-          <button id="exercise-btn">
+          <button id="exercise-btn" class="categories" data-id="exercise">
             <img src="assets/exercise.svg"/>
             <span>Exercise</span>
-          </button>
+          </button> 
+        </div>
+        <div class="error-message error-category hidden" data-id="error-chosenCategory">
+          <img src="assets/warning.svg" />
+          <p class="error-active">Please select a category</p>
         </div>
         <form class="form-inputs">
           <div class="accomplish">
             <label for="accomplish">What would you like to accomplish during this time?</label>
             <input id="accomplish" type="text"/>
-            <div class="error-message hidden">
+            <div class="error-message hidden" data-id="error-task">
               <img src="assets/warning.svg" />
               <p class="error-active">A description is required</p>
             </div>
@@ -43,7 +47,7 @@
             <div class="minutes">
               <label for="minutes-input">Minutes: </label>
               <input id="minutes-input" type="text"/>
-              <div class="error-message hidden">
+              <div class="error-message hidden" data-id="error-minutes">
                 <img src="assets/warning.svg" />
                 <p class="error-active">Please enter minutes (0-59)</p>
               </div>
@@ -51,11 +55,15 @@
             <div class="seconds">
               <label for="seconds-input">Seconds: </label>
               <input id="seconds-input" type="text"/>
-              <div class="error-message hidden">
+              <div class="error-message hidden" data-id="error-seconds">
                 <img src="assets/warning.svg" />
                 <p class="error-active">Please enter seconds (0-59)</p>
               </div>
             </div>
+          </div>
+          <div class="error-message error-valid-time hidden" data-id="error-validTime">
+            <img src="assets/warning.svg" />
+            <p class="error-active">Please enter a valid time</p>
           </div>
           <div class="start-activity-btn">
           <button id="start-activity">Start Activity</button>
