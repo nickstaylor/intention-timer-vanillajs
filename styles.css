@@ -6,17 +6,9 @@ body {
   width: 100%;
   height: 100vh;
   margin: 0px;
-  /* display: grid;
-  grid-gap: 5px;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 9% auto;
-  grid-template-areas:
-    "h h h"
-    "l l r"; */
 }
 
 header {
-  /* grid-area: h; */
   display: flex;
   justify-content: center;
   background-color: #46424D;
@@ -26,23 +18,24 @@ header {
   height: 9%;
 }
 
+/* FORM STYLING */
+
 main {
   display: flex;
   height: 91%;
 }
 
 .form-timer-container {
-  /* grid-area: l; */
   background-color: #2B2733;
   width: 66%;
   margin-right: 1%;
 }
 
-.form-timer-container h2 {
+h2 {
   margin-left: 20px;
 }
 
-.user-form {
+.user-form, .timer-section, .activities-section {
   background: #46424D;  
   margin: 20px;
   height: 85%;
@@ -80,6 +73,7 @@ main {
   cursor: pointer;
   background: #46424D;
   border: 1px solid #cbc9cf;
+  outline: none;
 }
 
 .top-buttons img {
@@ -156,35 +150,33 @@ main {
   height: 40px;
   padding: 5px;
   font-size: 1em;
+  outline: none;
 }
 
 /* colors */ 
 
-.top-buttons .exercise-active {
+.top-buttons .exercise-active, .exercise-active {
   color: #FD8078;
-  /* border: 1px solid #FD8078; */
 }
 
-.top-buttons .exercise-border {
-  border: 2px solid #FD8078;
+.top-buttons .exercise-border, .exercise-border {
+  border: 3px solid #FD8078;
 }
 
-.top-buttons .meditate-active {
+.top-buttons .meditate-active, .meditate-active {
   color: #C278FD;
-  /* border: 1px solid #C278FD; */
 }
 
-.top-buttons .meditate-border {
-  border: 2px solid #C278FD;
+.top-buttons .meditate-border, .meditate-border {
+  border: 3px solid #C278FD;
 }
 
-.top-buttons .study-active {
+.top-buttons .study-active, .study-active {
   color: #B3FD78;
-  /* border: 1px solid #B3FD78; */
 }
 
-.top-buttons .study-border {
-  border: 1px solid #B3FD78;
+.top-buttons .study-border, .study-border  {
+  border: 3px solid #B3FD78;
 }
 
 .error-active {
@@ -194,12 +186,72 @@ main {
 .error-border {
   border-bottom: 2px solid #EFB7EC;
 }
+/* end of FORM STYLING */
+
+/* TIMER STYLING */
+
+.timer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.top-timer-column-box {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em
+}
+
+.top-timer-column-box p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.timer-display {
+  font-family: sans-serif;
+  font-size: 2.5em;
+  color: white;
+}
+
+.timer-circle-btn {
+  font-size: 1.5em;
+  margin-top: 2em;
+  background-color: #46424D;
+  color: lightgray;
+  height: 35%;
+  width: 35%;
+  border-radius: 50%;
+  display: block;
+  outline: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.log-activity-btn {
+  margin-top: 10%;
+  font-size: 1.0em;
+  width: 30%;
+  height: 6%;
+  margin-bottom: 7%;
+  text-transform: uppercase;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+
+}
 
 
+/* end of TIMER STYLING */
 
-.activities-container {
+
+/* ACTIVITIES CONTAINER STYLING */
+aside {
   width: 33%;
-  /* grid-area: r; */
+  height: 100%;
   background-color: #2b2733;
 }
 
