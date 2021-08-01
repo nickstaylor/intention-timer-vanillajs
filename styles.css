@@ -190,11 +190,12 @@ h2 {
 
 /* TIMER STYLING */
 
-.timer-section {
+.timer-inner-section, .create-new-btn-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  height: 100%;
 }
 
 .top-timer-column-box {
@@ -241,7 +242,17 @@ h2 {
   border-radius: 4px;
   outline: none;
   cursor: pointer;
+}
 
+.create-new-activity-btn {
+  font-size: 1.0em;
+  width: 50%;
+  height: 9%;
+  margin-top: 10%;
+  text-transform: uppercase;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
 }
 
 
