@@ -13,6 +13,7 @@
   <header>Intention Timer</header>
   <main>
     <div class="form-timer-container">
+      
       <h2 class="left-side-header">New Activity</h2>
       <section class="user-form">
         <h3>Select a Category:</h3>
@@ -73,13 +74,19 @@
 
       <!-- timer section -->
       <section class="timer-section hidden">
-        <div class="top-timer-column-box">
-          <p class="activity-name">Activity Name</p>
-          <p class="timer-display">05:00</p>
+        <div class="timer-inner-section">
+          <div class="top-timer-column-box">
+            <p class="activity-name">Activity Name</p>
+            <p class="timer-display">05:00</p>
+          </div>
+          <button class="timer-circle-btn">Start</button>
+          <button class="log-activity-btn hidden">Log Activity</button>
         </div>
-        <button class="timer-circle-btn">Start</button>
-        <button class="log-activity-btn hidden">Log Activity</button>
+        <div class="create-new-btn-section hidden">
+          <button class="create-new-activity-btn">Create a new activity</button>
+        </div>
       </section>
+
     </div>
     
     <!-- Activity section -->
