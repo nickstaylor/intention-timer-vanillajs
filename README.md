@@ -1,6 +1,6 @@
 # intention-timer-vanillajs
 
-![Live Site](https://nickstaylor.github.io/intention-timer-vanillajs/)
+Check out the [Live Site](https://nickstaylor.github.io/intention-timer-vanillajs/)!
 
 ## A fun throwback to a Mod1 project from my time at Turing!
 
