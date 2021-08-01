@@ -8,6 +8,7 @@ var minutesInput = document.querySelector("#minutes-input")
 var secondsInput = document.querySelector("#seconds-input")
 var formPage = document.querySelector(".user-form")
 var leftSideHeader = document.querySelector(".left-side-header")
+var clearLocalStorage = document.querySelector(".local-storage-clear")
 //timer section query selectors
 var timerPage = document.querySelector(".timer-section")
 var timerInnerPage = document.querySelector(".timer-inner-section")
@@ -17,6 +18,8 @@ var timerButton = document.querySelector(".timer-circle-btn")
 var logActivityButton = document.querySelector(".log-activity-btn")
 var createNewButtonSection = document.querySelector(".create-new-btn-section")
 var createNewButton = document.querySelector(".create-new-activity-btn")
+var noActivityMessage = document.querySelector(".no-activity-message")
+var savedActivitiesSection = document.querySelector(".activities-section")
 
 
 //global variables
@@ -35,6 +38,34 @@ secondsInput.addEventListener('keyup', validateMinSec)
 timerButton.addEventListener('click', startTimer)
 logActivityButton.addEventListener('click', logActivity)
 createNewButton.addEventListener('click', resetForm)
+clearLocalStorage.addEventListener('click', clearLS)
+
+////// Feltch activities from local storage //////
+
+window.onload = function () {
+  let activities = localStorage.getItem('activities')
+  let allActivities = JSON.parse(activities)
+  if (allActivities) {
+    clearLocalStorage.classList.remove('hidden')
+    allActivities.forEach(activity => {
+      savedActivities.push(new Activity({
+        chosenCategory: activity.category,
+        task: activity.description,
+        minutes: activity.minutes,
+        seconds: activity.seconds,
+        id: activity.id
+      }))
+      insertSavedActivity(activity)
+    })
+  }
+  console.log('savedActivitiesFromLocalStorage', savedActivities)
+}
+
+////// Clear Local Storage //////
+function clearLS() {
+    window.localStorage.clear();
+    clearLocalStorage.classList.add("hidden");
+}
 
 ////// FORM VALIDATION and ACTIVITY CREATION //////
 function selectCategory(e) {
@@ -121,7 +152,6 @@ function displayTimerPage() {
   activityName.innerText = `${activity.description}`
   timerDisplay.innerText = `${activity.minutes < 10 ? "0" + `${activity.minutes}` : `${activity.minutes}`}:${activity.seconds < 10 ? "0" + `${activity.seconds}` : `${activity.seconds}`}`
   timerPage.classList.remove('hidden');
-  console.log('currentActivity', currentActivity)
 }
 
 function startTimer() {
@@ -138,22 +168,45 @@ function startTimer() {
 
 function logActivity() {
   savedActivities.push(currentActivity)
+  currentActivity.saveToStorage(savedActivities)
+  clearLocalStorage.classList.remove('hidden')
   timerInnerPage.classList.add("hidden")
   createNewButtonSection.classList.remove('hidden')
-  console.log('savedActivities', savedActivities)
+  insertSavedActivity(currentActivity)
 }
+
+function insertSavedActivity(activity) {
+  noActivityMessage.classList.add('hidden')
+  savedActivitiesSection.insertAdjacentHTML(
+    "afterbegin",
+      `
+      <div class="activity-container">
+        <section class="top-of-activity-card activity-card-${activity.category}">
+          <p class="activity-card-category">${activity.category}</p>
+          <p class="activity-card-time">${activity.minutes} minutes ${activity.seconds} Seconds</p>
+        </section>
+        <section class="botton-of-activity-card">
+          <p class="activity-card-desc">${activity.description}</p>
+        </section>
+      </div>
+      `
+  );
+  
+}
+
 ////// end of TIMER FUNCTIONS and ACTIVITY LOGGING //////
 
 ////// RESET FUNCTIONS //////
 function resetForm() {
   resetCategoryButtons(chosenCategory)
+  resetTimerPage(currentActivity);
   resetGlobalVariables();
   taskInput.value = '';
   minutesInput.value = '';
   secondsInput.value = '';
   leftSideHeader.innerHTML = "New Activity"
+  timerPage.classList.add("hidden");
   formPage.classList.remove("hidden");
-  resetTimerPage();
 }
 
 function resetGlobalVariables() {
@@ -164,8 +217,8 @@ function resetGlobalVariables() {
   seconds = '';
 }
 
-function resetTimerPage() {
-  timerPage.classList.add("hidden");
+function resetTimerPage(activity) {
+  timerButton.classList.remove(`${activity.category}-border`);
   timerInnerPage.classList.remove("hidden")
   logActivityButton.classList.add("hidden")
   createNewButtonSection.classList.add("hidden")
@@ -181,7 +234,7 @@ function resetCategoryButtons(chosenCategory) {
       button.children[0].src = `assets/${buttonName}.svg`;
       button.children[1].classList.remove(`${buttonName}-active`);
     }
-  })
+  });
 }
 
 ////// end of REST FUNCTIONS //////
