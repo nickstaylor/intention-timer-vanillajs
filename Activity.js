@@ -1,11 +1,11 @@
 class Activity {
-  constructor({ chosenCategory, task, minutes, seconds }) {
+  constructor({ chosenCategory, task, minutes, seconds, id}) {
     this.category = chosenCategory;
     this.description = task;
     this.minutes = minutes;
     this.seconds = seconds;
     this.completed = false;
-    this.id = Date.now();
+    this.id =  id || Date.now();
     this.totalTime = (this.minutes * 60) + this.seconds;
     this.timerActive = false
   }
@@ -38,7 +38,6 @@ class Activity {
     }
 
     let timer = null;
-    console.log('this.timerActive', this.timerActive)
     if (this.timerActive) {
       timer = setInterval(countDown, 1000)
       timerButton.innerText = "pause"
@@ -54,7 +53,8 @@ class Activity {
     logActivityButton.classList.remove('hidden')
   }
 
-  saveToStorage() {
-    //local storage logic here
+  saveToStorage(activities) {
+    let allActivities = JSON.stringify(activities)
+    localStorage.setItem('activities', allActivities)
   }
 }
