@@ -10,10 +10,13 @@ var formPage = document.querySelector(".user-form")
 var leftSideHeader = document.querySelector(".left-side-header")
 //timer section query selectors
 var timerPage = document.querySelector(".timer-section")
+var timerInnerPage = document.querySelector(".timer-inner-section")
 var activityName = document.querySelector(".activity-name")
 var timerDisplay = document.querySelector(".timer-display")
 var timerButton = document.querySelector(".timer-circle-btn")
 var logActivityButton = document.querySelector(".log-activity-btn")
+var createNewButtonSection = document.querySelector(".create-new-btn-section")
+var createNewButton = document.querySelector(".create-new-activity-btn")
 
 
 //global variables
@@ -22,7 +25,7 @@ var task = '';
 var minutes = '';
 var seconds = '';
 var currentActivity = {};
-var timer = null;
+var savedActivities = [];
 
 //event listeners
 startButton.addEventListener('click', validateCreateActivity)
@@ -31,6 +34,7 @@ minutesInput.addEventListener('keyup', validateMinSec)
 secondsInput.addEventListener('keyup', validateMinSec)
 timerButton.addEventListener('click', startTimer)
 logActivityButton.addEventListener('click', logActivity)
+createNewButton.addEventListener('click', resetForm)
 
 ////// FORM VALIDATION and ACTIVITY CREATION //////
 function selectCategory(e) {
@@ -117,14 +121,67 @@ function displayTimerPage() {
   activityName.innerText = `${activity.description}`
   timerDisplay.innerText = `${activity.minutes < 10 ? "0" + `${activity.minutes}` : `${activity.minutes}`}:${activity.seconds < 10 ? "0" + `${activity.seconds}` : `${activity.seconds}`}`
   timerPage.classList.remove('hidden');
-}
-
-function startTimer() {
   console.log('currentActivity', currentActivity)
 }
 
+function startTimer() {
+  if (timerButton.innerText === 'PAUSE') {
+    currentActivity.timerActive = false
+    timerButton.innerText = 'start'
+    currentActivity.startTimer({timerDisplay, timerButton, logActivityButton});
+    return
+  }
+    currentActivity.timerActive = true;
+    currentActivity.startTimer({timerDisplay, timerButton, logActivityButton});
+}
+
+
 function logActivity() {
+  savedActivities.push(currentActivity)
+  timerInnerPage.classList.add("hidden")
+  createNewButtonSection.classList.remove('hidden')
+  console.log('savedActivities', savedActivities)
+}
+////// end of TIMER FUNCTIONS and ACTIVITY LOGGING //////
+
+////// RESET FUNCTIONS //////
+function resetForm() {
+  resetCategoryButtons(chosenCategory)
+  resetGlobalVariables();
+  taskInput.value = '';
+  minutesInput.value = '';
+  secondsInput.value = '';
+  leftSideHeader.innerHTML = "New Activity"
+  formPage.classList.remove("hidden");
+  resetTimerPage();
+}
+
+function resetGlobalVariables() {
+  currentActivity = {};
+  chosenCategory = '';
+  task = '';
+  minutes = '';
+  seconds = '';
+}
+
+function resetTimerPage() {
+  timerPage.classList.add("hidden");
+  timerInnerPage.classList.remove("hidden")
+  logActivityButton.classList.add("hidden")
+  createNewButtonSection.classList.add("hidden")
+  timerButton.innerText = 'start';
   
 }
 
-////// end of TIMER FUNCTIONS and ACTIVITY LOGGING //////
+function resetCategoryButtons(chosenCategory) {
+  categoryButtons.forEach((button) => {
+    let buttonName = button.dataset.id;
+    if (chosenCategory === buttonName) {
+      button.classList.remove(`${buttonName}-border`);
+      button.children[0].src = `assets/${buttonName}.svg`;
+      button.children[1].classList.remove(`${buttonName}-active`);
+    }
+  })
+}
+
+////// end of REST FUNCTIONS //////
