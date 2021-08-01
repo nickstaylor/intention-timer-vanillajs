@@ -11,9 +11,10 @@
 </head>
 <body>
   <header>Intention Timer</header>
+  <p class="local-storage-clear hidden">CLS</p> 
   <main>
     <div class="form-timer-container">
-      
+
       <h2 class="left-side-header">New Activity</h2>
       <section class="user-form">
         <h3>Select a Category:</h3>
@@ -93,7 +94,10 @@
     <aside class="activities-container">
       <h2>Past Activities</h2>
       <section class="activities-section">
-        Saved Activties Container
+        <div class="no-activity-message">
+          <p>You haven't logged any activities yet!</p>
+          <p>Click the form on the left to get started!</p>
+        </div>
       </section>
     </aside>
   </main>
