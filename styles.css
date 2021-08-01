@@ -35,7 +35,7 @@ h2 {
   margin-left: 20px;
 }
 
-.user-form, .timer-section, .activities-section {
+.user-form, .timer-section {
   background: #46424D;  
   margin: 20px;
   height: 85%;
@@ -151,6 +151,7 @@ h2 {
   padding: 5px;
   font-size: 1em;
   outline: none;
+  cursor: pointer;
 }
 
 /* colors */ 
@@ -266,6 +267,78 @@ aside {
   background-color: #2b2733;
 }
 
+ .activities-section {
+  margin: 20px;
+  height: 85%;
+  padding-top: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.no-activity-message p {
+  text-align: center;
+  font-size: .9em;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.activity-container {
+  background: #46424D;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 70px;
+  width: 100%;
+  margin-bottom: 10px;
+  align-items: left;
+}
+
+.top-of-activity-card, .botton-of-activity-card{
+  margin: 4px;
+  height: 32px;
+}
+
+.activity-card-study{
+  border-right: 3px solid #B3FD78;
+}
+.activity-card-meditate {
+  border-right: 3px solid #C278FD;
+}
+.activity-card-exercise {
+border-right: 3px solid #FD8078;
+}
+
+.activity-card-category {
+  color: #fff;
+  font-size: .7em;
+  margin: 2px;
+  text-transform: capitalize;
+}
+
+.activity-card-time {
+  color: #cbc9cf;
+  font-size: .8em;
+  margin: 2px;
+  text-transform: uppercase;
+}
+
+.activity-card-desc {
+  color: #cbc9cf;
+  font-size: .8em;
+  margin: 2px;
+}
+
 .hidden {
   display: none;
+}
+
+.local-storage-clear{
+  position: absolute;
+  color: #cbc9cf;
+  font-size: .2em;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
