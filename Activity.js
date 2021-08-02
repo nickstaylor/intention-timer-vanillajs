@@ -1,5 +1,5 @@
 class Activity {
-  constructor({ chosenCategory, task, minutes, seconds, id}) {
+  constructor({ chosenCategory, task, minutes, seconds, id, favorite}) {
     this.category = chosenCategory;
     this.description = task;
     this.minutes = minutes;
@@ -8,6 +8,7 @@ class Activity {
     this.id =  id || Date.now();
     this.totalTime = (this.minutes * 60) + this.seconds;
     this.timerActive = false
+    this.favorite = favorite || false
   }
   
 
