@@ -20,6 +20,7 @@ var createNewButtonSection = document.querySelector(".create-new-btn-section")
 var createNewButton = document.querySelector(".create-new-activity-btn")
 var noActivityMessage = document.querySelector(".no-activity-message")
 var savedActivitiesSection = document.querySelector(".activities-section")
+var showFavorites = document.querySelector(".show-favorites")
 
 
 //global variables
@@ -29,6 +30,8 @@ var minutes = '';
 var seconds = '';
 var currentActivity = {};
 var savedActivities = [];
+var favorites = [];
+var showingFavorites = false;
 
 //event listeners
 startButton.addEventListener('click', validateCreateActivity)
@@ -39,6 +42,7 @@ timerButton.addEventListener('click', startTimer)
 logActivityButton.addEventListener('click', logActivity)
 createNewButton.addEventListener('click', resetForm)
 clearLocalStorage.addEventListener('click', clearLS)
+showFavorites.addEventListener('click', displayFavorites)
 
 ////// Feltch activities from local storage //////
 
@@ -53,12 +57,15 @@ window.onload = function () {
         task: activity.description,
         minutes: activity.minutes,
         seconds: activity.seconds,
-        id: activity.id
+        id: activity.id,
+        favorite: activity.favorite
       }))
+      if (activity.favorite) {
+        favorites.push(activity.id)
+      }
       insertSavedActivity(activity)
     })
   }
-  console.log('savedActivitiesFromLocalStorage', savedActivities)
 }
 
 ////// Clear Local Storage //////
@@ -180,17 +187,82 @@ function insertSavedActivity(activity) {
   savedActivitiesSection.insertAdjacentHTML(
     "afterbegin",
       `
-      <div class="activity-container">
+      <div class="activity-container" data-id=${activity.id}>
         <section class="top-of-activity-card activity-card-${activity.category}">
           <p class="activity-card-category">${activity.category}</p>
           <p class="activity-card-time">${activity.minutes} minutes ${activity.seconds} Seconds</p>
         </section>
         <section class="botton-of-activity-card">
           <p class="activity-card-desc">${activity.description}</p>
+          <div class="replay-favorite-images">
+          <img src="assets/replay-hollow.svg" class="replay-img" onclick="replayActivity(${activity.id})" />
+          <img src="assets/heart-${activity.favorite ? 'filled.svg' : 'outline.svg'}" class="favorite-img" id="${activity.id}" onclick="favoriteActivity(${activity.id})" />
+          </div>
         </section>
       </div>
       `
   );
+}
+
+function displayFavorites() {
+  showingFavorites = !showingFavorites
+  if (showingFavorites) {
+    showFavorites.src = "assets/heart-filled.svg"
+  } else {
+    showFavorites.src = "assets/heart-outline.svg"
+  }
+  displayFavoritesOnCard();
+}
+
+function displayFavoritesOnCard() {
+  savedActivitiesSection.innerHTML = ''
+  savedActivities.forEach(activity => {
+    if (activity.favorite && showingFavorites) {
+      insertSavedActivity(activity)
+    }
+    if (!showingFavorites) {
+      insertSavedActivity(activity)
+    }
+  })
+}
+
+function replayActivity(id) {
+  console.log('id replay', id)
+}
+
+function favoriteActivity(id) {
+  let alreadyFavorite = alreadyFavorited(id)
+
+  let favorite = savedActivities.find(act => id === act.id)
+  var activityCards = Array.from(document.querySelectorAll('.activity-container'));
+  activityCards.forEach(card => {
+    if (parseInt(card.dataset.id) === id) {
+      let image = card.querySelector(".favorite-img")
+      if (alreadyFavorite) {
+        image.src = 'assets/heart-outline.svg'
+        favorite.favorite = false;
+      } else {
+        image.src = 'assets/heart-filled.svg'
+        favorite.favorite = true;
+      }
+    }
+  })
+  favorite.saveToStorage(savedActivities)
+  if (showingFavorites) {
+    displayFavoritesOnCard()
+  }
+}
+
+function alreadyFavorited(id) {
+  let alreadyFavorited = favorites.find(fav => id === fav)
+  if (!alreadyFavorited) {
+    favorites.push(id)
+    return false
+  } else {
+    let filtered = favorites.filter(fav => fav !== id)
+    favorites = filtered
+    return true
+  }
   
 }
 
