@@ -179,7 +179,9 @@ function logActivity() {
   clearLocalStorage.classList.remove('hidden')
   timerInnerPage.classList.add("hidden")
   createNewButtonSection.classList.remove('hidden')
-  insertSavedActivity(currentActivity)
+  if (!showingFavorites) {
+    insertSavedActivity(currentActivity)
+  }
 }
 
 function insertSavedActivity(activity) {
