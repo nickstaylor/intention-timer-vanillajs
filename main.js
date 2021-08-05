@@ -223,44 +223,33 @@ function deleteActivity(id) {
   activity.saveToStorage(savedActivities)
   activityContainer.remove();
 }
-
 function insertSavedActivity(activity) {
   noActivityMessage.classList.add('hidden')
+  let id = activity.id
   savedActivitiesSection.insertAdjacentHTML(
     "afterbegin",
     `
-    <div class="activity-container activity-${activity.id}" onmouseenter="showDelete(${activity.id}, true)" onmouseleave="hideDelete(${activity.id}, false)" data-id=${
-      activity.id
-    }>
-      <section class="delete-section delete-section-${activity.id} hidden">
-        <p class="delete-activity" onclick="deleteActivity(${
-          activity.id
-        })" >Delete Activity?</>
+    <div class="activity-container activity-${id}" onmouseenter="showDelete(${id})" onmouseleave="hideDelete(${id})" data-id=${id}>
+      <section class="delete-section delete-section-${id} hidden">
+        <p class="delete-activity" onclick="deleteActivity(${id})" >Delete Activity?</>
       </section>
-      <div class="body-blackout body-blackout-${activity.id} hidden"></div>
+      <div class="body-blackout body-blackout-${id} hidden"></div>
       <section class="top-of-activity-card activity-card-${activity.category}">
         <p class="activity-card-category">${activity.category}</p>
-        <p class="activity-card-time">${activity.minutes} minutes ${
-      activity.seconds
-    } Seconds</p>
+        <p class="activity-card-time">${activity.minutes} minute${activity.minutes === 1 ? '' : 's'} ${
+      activity.seconds} second${activity.seconds === 1 ? '' : 's'}</p>
       </section>
       <section class="botton-of-activity-card">
         <p class="activity-card-desc">${activity.description}</p>
         <div class="replay-favorite-images">
-          <img src="assets/replay-hollow.svg" class="replay-img" onclick="replayActivity(${
-            activity.id
-          })" />
-          <img src="assets/heart-${
-            activity.favorite ? "filled.svg" : "outline.svg"
-          }" class="favorite-img" id="${
-      activity.id
-    }" onclick="favoriteActivity(${activity.id})" />
+          <img src="assets/replay-hollow.svg" class="replay-img" onclick="replayActivity(${id})" />
+          <img src="assets/heart-${activity.favorite ? "filled.svg" : "outline.svg"}" class="favorite-img" id="${id}" onclick="favoriteActivity(${id})" />
         </div>
       </section>
     </div>
     `
   );
-  }
+}
   
 function displayFavorites() {
   showingFavorites = !showingFavorites
