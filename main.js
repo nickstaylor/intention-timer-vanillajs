@@ -191,8 +191,7 @@ function logActivity() {
 function showDelete(id) {
   let deleteSection = document.querySelector(`.delete-section-${id}`);
   let blackOutSection = document.querySelector(`.body-blackout-${id}`);
-    console.log('show delete')
-    activeDelay = setTimeout(function (id) {
+    activeDelay = setTimeout(function () {
           deleteSection.classList.remove("hidden");
           blackOutSection.classList.remove("hidden");
     }, 2500)
@@ -201,7 +200,6 @@ function showDelete(id) {
   
 function hideDelete(id) {
   clearTimeout(activeDelay)
-  console.log('clear')
   let deleteSection = document.querySelector(`.delete-section-${id}`)
   let blackOutSection = document.querySelector(`.body-blackout-${id}`)
   deleteSection.classList.add('hidden')
@@ -210,7 +208,20 @@ function hideDelete(id) {
 
 
 function deleteActivity(id) {
- console.log(id)
+  let activity = savedActivities.find(act => act.id === id)
+  let activityContainer = document.querySelector(`.activity-${id}`)
+  let updatedActivities = savedActivities.filter(act => act.id !== id)
+  savedActivities = updatedActivities
+  if (!savedActivities.length) {
+    noActivityMessage.classList.remove('hidden')
+  }
+  let newFavorites
+  if (activity.favorite) {
+    newFavorites = favorites.filter(fav => fav !== id)
+    favorites = newFavorites
+  }
+  activity.saveToStorage(savedActivities)
+  activityContainer.remove();
 }
 
 function insertSavedActivity(activity) {
