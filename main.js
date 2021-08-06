@@ -94,6 +94,7 @@ function selectCategory(e) {
       button.children[1].classList.remove(`${buttonName}-active`)
     }
   })
+  taskInput.focus();
 }
 
 function validateMinSec() {
@@ -223,6 +224,7 @@ function deleteActivity(id) {
   activity.saveToStorage(savedActivities)
   activityContainer.remove();
 }
+
 function insertSavedActivity(activity) {
   noActivityMessage.classList.add('hidden')
   let id = activity.id
@@ -271,10 +273,25 @@ function displayFavoritesOnCard() {
       insertSavedActivity(activity)
     }
   })
-  }
+}
   
 function replayActivity(id) {
   let activity = savedActivities.find(act => id === act.id)
+  resetForm();
+  taskInput.value = activity.description
+  minutesInput.value = activity.minutes
+  secondsInput.value = activity.seconds
+
+  categoryButtons.forEach(button => {
+    let buttonName = button.dataset.id;
+    if (activity.category === buttonName) {
+      chosenCategory = activity.category
+      button.classList.add(`${activity.category}-border`)
+      button.children[0].src = `assets/${activity.category}-active.svg`
+      button.children[1].classList.add(`${activity.category}-active`)
+    }
+  })
+  startButton.focus();
   console.log('activity', activity)
 }
 
@@ -335,7 +352,7 @@ function alreadyFavorited(id) {
 ////// RESET FUNCTIONS //////
 function resetForm() {
   resetCategoryButtons(chosenCategory)
-  resetTimerPage(currentActivity);
+  resetTimerPage(currentActivity.category);
   resetGlobalVariables();
   taskInput.value = '';
   minutesInput.value = '';
@@ -354,12 +371,11 @@ function resetGlobalVariables() {
 }
 
 function resetTimerPage(activity) {
-  timerButton.classList.remove(`${activity.category}-border`);
+  timerButton.classList.remove(`${activity}-border`);
   timerInnerPage.classList.remove("hidden")
   logActivityButton.classList.add("hidden")
   createNewButtonSection.classList.add("hidden")
   timerButton.innerText = 'start';
-  
 }
 
 function resetCategoryButtons(chosenCategory) {
